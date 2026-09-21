@@ -66,6 +66,6 @@ void main() {
 
   });
   test('Ver médias', () {
-    expect(medias, {'Maria': 8.5, 'Carla': 8.5, 'Elena': 8.5, 'Luiza': 8.5});
+    expect(medias, {'Maria': 8.5, 'Carla': 8.5, 'Luiza': 8.5});
   });
 }
