@@ -90,39 +90,42 @@ class Historico extends Turma {
       soma = soma + nota;
     }
     return soma / listaNotas.length;
-    
   }
 
   bool isAprovado(Aluno aluno) {
     return media(aluno) > 6.0;
-}
+  }
 
-void main() {
-  test('Testar matrícula de alunos', () {
-    Professor docente = Professor("Edilson Luiz Nascimento");
-    Disciplina disciplina1 = Disciplina('Flutter');
-    Historico historico1 = Historico(disciplina1, 2023, docente);
-    // Cadastrar primeiro aluno sem erros
-    Aluno aluno1 = Aluno('Maria', 2023);
-    aluno1.id = 1;
-    historico1.matricular(aluno1);
+  void main() {
+    test('Testar matrícula de alunos', () {
+      Professor docente = Professor("Edilson Luiz Nascimento");
+      Disciplina disciplina1 = Disciplina('Flutter');
+      Historico historico1 = Historico(disciplina1, 2023, docente);
+      // Cadastrar primeiro aluno sem erros
+      Aluno aluno1 = Aluno('Maria', 2023);
+      aluno1.id = 1;
+      historico1.matricular(aluno1);
 
-    expect(historico1.media(aluno1), 0.0);
-    expect(historico1.isAprovado(aluno1), false);
-    // Cadastrar segundo aluno com erros
-    Aluno aluno2 = Aluno('Paula', 2022);
-    try {
-      aluno2.id = 0;
-    } catch (error) {
-      expect(error, isA<ArgumentError>());
-    }
-    try {
-      historico1.matricular(aluno2);
-    } catch (error) {
-      expect(error, isA<ArgumentError>());
-    }
+      expect(historico1.media(aluno1), 0.0);
+      expect(historico1.isAprovado(aluno1), false);
+      // Cadastrar segundo aluno com erros
+      Aluno aluno2 = Aluno('Paula', 2022);
+      try {
+        aluno2.id = 0;
+      } catch (error) {
+        expect(error, isA<ArgumentError>());
+      }
+      try {
+        historico1.matricular(aluno2);
+      } catch (error) {
+        expect(error, isA<ArgumentError>());
+      }
 
-    expect(() => aluno2.id = 0, throwsA(isA<ArgumentError>()));
-    expect(() => historico1.matricular(aluno2), throwsA(isA<ArgumentError>()));
-  });
+      expect(() => aluno2.id = 0, throwsA(isA<ArgumentError>()));
+      expect(
+        () => historico1.matricular(aluno2),
+        throwsA(isA<ArgumentError>()),
+      );
+    });
+  }
 }
